@@ -1,0 +1,27 @@
+name: 'circleci-trigger-action'
+description: 'Triggers a pipeline in a remote circleci project'
+inputs:
+  id:  
+    description: 'identifier for the trigger. eg: team-pipeline'
+    default: 'uuid'
+  project:  
+    description: 'circleci project you want the trigger to be executed, format {org}/{project}. eg: mycompany/awesome-project'
+    required: true
+  branch:
+    description: 'branch of the project you want the trigger to be executed'
+    default: 'master'
+  token:
+    description: 'circleci machine/personal token with permissions to the project you want to trigger'
+    required: true
+  timeout:
+    description: 'how long the pipeline should run before timing out, in minutes'
+    default: 10
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.id }}
+    - ${{ inputs.project }}
+    - ${{ inputs.branch }}
+    - ${{ inputs.token }}
+    - ${{ inputs.timeout }}
