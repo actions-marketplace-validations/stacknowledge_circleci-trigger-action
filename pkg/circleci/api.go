@@ -92,7 +92,6 @@ func (api *CircleCIAPI) request(method, url string, body []byte) (*http.Response
 	}
 
 	if response.StatusCode == http.StatusNotFound {
-		fmt.Println(method, url, string(body), response.StatusCode, http.StatusNotFound)
 		return nil, ErrNotFound
 	}
 
